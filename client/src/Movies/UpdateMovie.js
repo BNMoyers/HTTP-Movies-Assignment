@@ -16,7 +16,13 @@ const UpdateMovie = props => {
   const changeHandler = e => {
     e.persist();
     let value = e.target.value;
-    e.target.name === 'metascore' ? (value = parseInt(value,10)) : (value = value)
+    if(e.target.name === 'metascore') {
+      value = parseInt(value,10)
+    }else if(e.target.name==='stars') {
+      value = e.target.value.split(',')
+    }else{
+       (value = value)
+    }
   setMovie({
     ...movie,
     [e.target.name]: value
@@ -41,6 +47,18 @@ const UpdateMovie = props => {
                   onChange={changeHandler}
                   placeholder ='director'
                   value={movie.director}
+                  />
+          <input type='text'
+                  name='metascore'
+                  onChange={changeHandler}
+                  placeholder ='metascore'
+                  value={movie.matascore}
+                  />
+          <input type='text'
+                  name='stars'
+                  onChange={changeHandler}
+                  placeholder ='Stars (separate with comma)'
+                  value={movie.stars}
                   />
         </form>
       </div>
