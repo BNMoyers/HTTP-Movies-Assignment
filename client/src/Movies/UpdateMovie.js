@@ -28,9 +28,8 @@ const UpdateMovie = props => {
       value = parseInt(value, 10);
     } else if (e.target.name === "stars") {
       value = e.target.value.split(",");
-    } else {
-      value = value;
-    }
+    } 
+    
     setMovie({
       ...movie,
       [e.target.name]: value
@@ -42,10 +41,10 @@ const UpdateMovie = props => {
     axios
     .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
     .then(res => {
-      props.movies.updateMovies(res.data);
-      props.history.push('/');
+      props.movies.updateMovies([...props,res.data]);
     })
     .catch(err => console.log(err.response))
+    props.history.push("/")
   };
   return (
     <div>
